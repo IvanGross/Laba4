@@ -1,0 +1,169 @@
+// Laba4.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+//
+
+#include <iostream>
+#include <string>
+#include <limits>
+using namespace std;
+
+class Figure
+{
+public:
+	Figure(string _Name, int _Lines)
+	{
+		Name = _Name;
+		Lines = _Lines;
+	}
+	~Figure()
+	{
+
+	}
+	string getName()
+	{
+		return Name;
+	}
+	int getLines()
+	{
+		return Lines;
+	}
+
+private:
+	string Name;
+	int Lines;
+};
+
+class Сircle :public Figure
+{
+public:
+	Сircle(double _Radius, int _X, int _Y) :Figure("Круг", 1)
+	{
+		Radius = _Radius;
+		X = _X;
+		Y = _Y;
+	}
+	~Сircle()
+	{
+
+	}
+	void Print_Circle()
+	{
+		cout << "Имя:" << getName() << " Линии:" << getLines() << " Радиус:" << Radius << " Координаты центра:" << X << ";" << Y << endl;
+	}
+
+private:
+	double Radius;
+	int X, Y;
+};
+
+class Foursquare :public Figure
+{
+public:
+	Foursquare(int _Side) :Figure("Квадрат", 4)
+	{
+		Side = _Side;
+		Perimeter = Side * 4;
+	}
+	~Foursquare()
+	{
+
+	}
+	void Print_Foursquare()
+	{
+		cout << "Имя:" << getName() << " Линии:" << getLines() << " Длина стороны:" << Side << " Периметр " << Perimeter << endl;
+	}
+private:
+	double Side;
+	double Perimeter;
+};
+
+class Triangle :public Figure
+{
+public:
+	Triangle(int _A, int _B, int _C) :Figure("Треугольник", 3)
+	{
+		A = _A;
+		B = _B;
+		C = _C;
+	}
+	~Triangle()
+	{
+
+	}
+	void Print_Triangle()
+	{
+		cout << "Имя:" << getName() << " Линии:" << getLines() << " A: " << A << " B: " << B << " C: " << C << endl;
+	}
+private:
+	double A, B, C;
+};
+
+int main()
+{
+	setlocale(LC_ALL, "Russian");
+	cout << "Введите радиус" << endl;
+	double Radius;
+	while (!(cin >> Radius) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	cout << "Введите координаты центра" << endl;
+	cout << "X" << endl;
+	int X;
+	while (!(cin >> X) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	cout << "Y" << endl;
+	int Y;
+	while (!(cin >> Y) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	Сircle circle(Radius, X, Y);
+	cout << "Введите длину стороны" << endl;
+	double Side;
+	while (!(cin >> Side) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	Foursquare foursquare(Side);
+	cout << "Введите стороны треугольника" << endl;
+	cout << "A" << endl;
+	int A;
+	while (!(cin >> A) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	cout << "B" << endl;
+	int B;
+	while (!(cin >> B) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	cout << "C" << endl;
+	int C;
+	while (!(cin >> C) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	Triangle triangle(A, B, C);
+	system("cls");
+	circle.Print_Circle();
+	foursquare.Print_Foursquare();
+	triangle.Print_Triangle();
+	system("pause");
+}

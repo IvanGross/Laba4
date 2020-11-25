@@ -1,6 +1,3 @@
-// Laba4.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
 #include <iostream>
 #include <string>
 #include <limits>
@@ -35,7 +32,7 @@ private:
 class Сircle :public Figure
 {
 public:
-	Сircle(double _Radius, int _X, int _Y) :Figure("Круг", 1)
+	Сircle(string _Name, int _Lines, double _Radius, int _X, int _Y) :Figure(_Name, _Lines)
 	{
 		Radius = _Radius;
 		X = _X;
@@ -47,21 +44,20 @@ public:
 	}
 	void Print_Circle()
 	{
-		cout << "Имя:" << getName() << " Линии:" << getLines() << " Радиус:" << Radius << " Координаты центра:" << X << ";" << Y << endl;
+		cout << "Имя:" << getName() << "Линии:" << getLines() << "Радиус:" << Radius << "Координаты центра:" << X << ";" << Y << endl;
 	}
-
 private:
 	double Radius;
-	int X, Y;
+	int X, Y;//координаты центра
 };
 
 class Foursquare :public Figure
 {
 public:
-	Foursquare(int _Side) :Figure("Квадрат", 4)
+	Foursquare(string _Name, int _Lines, double _Side, double _Perimetr) :Figure(_Name, _Lines)
 	{
 		Side = _Side;
-		Perimeter = Side * 4;
+		Perimeter = _Perimetr;
 	}
 	~Foursquare()
 	{
@@ -69,7 +65,7 @@ public:
 	}
 	void Print_Foursquare()
 	{
-		cout << "Имя:" << getName() << " Линии:" << getLines() << " Длина стороны:" << Side << " Периметр " << Perimeter << endl;
+		cout << "Имя:" << getName() << "Линии:" << getLines() << "Длина стороны :" << Side << "Периметр" << Perimeter << endl;
 	}
 private:
 	double Side;
@@ -79,7 +75,7 @@ private:
 class Triangle :public Figure
 {
 public:
-	Triangle(int _A, int _B, int _C) :Figure("Треугольник", 3)
+	Triangle(string _Name, int _Lines, int _A, int _B, int _C) :Figure(_Name, _Lines)
 	{
 		A = _A;
 		B = _B;
@@ -91,7 +87,7 @@ public:
 	}
 	void Print_Triangle()
 	{
-		cout << "Имя:" << getName() << " Линии:" << getLines() << " A: " << A << " B: " << B << " C: " << C << endl;
+		cout << "Имя:" << getName() << "Линии:" << getLines() << " A:" << A << " B:" << B << " C:" << C << endl;
 	}
 private:
 	double A, B, C;
@@ -100,7 +96,18 @@ private:
 int main()
 {
 	setlocale(LC_ALL, "Russian");
-	cout << "Введите радиус" << endl;
+	cout << "Введите имя (круг)" << endl;
+	string Name;
+	cin >> Name;
+	cout << "Введите 1 линию" << endl;
+	int Lines;
+	while (!(cin >> Lines) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	cout << "Введите радиус " << endl;
 	double Radius;
 	while (!(cin >> Radius) || (cin.peek() != '\n'))
 	{
@@ -108,7 +115,7 @@ int main()
 		while (cin.get() != '\n');
 		cout << "Недействительный ввод" << endl;
 	}
-	cout << "Введите координаты центра" << endl;
+	cout << "Введите координаты центра " << endl;
 	cout << "X" << endl;
 	int X;
 	while (!(cin >> X) || (cin.peek() != '\n'))
@@ -125,8 +132,17 @@ int main()
 		while (cin.get() != '\n');
 		cout << "Недействительный ввод" << endl;
 	}
-	Сircle circle(Radius, X, Y);
-	cout << "Введите длину стороны" << endl;
+	Сircle circle(Name, Lines, Radius, X, Y);
+	cout << "Введите имя (квадрат) " << endl;
+	cin >> Name;
+	cout << "Введите 4 линии " << endl;
+	while (!(cin >> Lines) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	cout << "Введите сторону " << endl;
 	double Side;
 	while (!(cin >> Side) || (cin.peek() != '\n'))
 	{
@@ -134,7 +150,24 @@ int main()
 		while (cin.get() != '\n');
 		cout << "Недействительный ввод" << endl;
 	}
-	Foursquare foursquare(Side);
+	cout << "Введите периметр " << endl;
+	double Perimetr;
+	while (!(cin >> Perimetr) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
+	Foursquare foursquare(Name, Lines, Side, Perimetr);
+	cout << "Введите имя (треугольник) " << endl;
+	cin >> Name;
+	cout << "Введите 3 линии" << endl;
+	while (!(cin >> Lines) || (cin.peek() != '\n'))
+	{
+		cin.clear();
+		while (cin.get() != '\n');
+		cout << "Недействительный ввод" << endl;
+	}
 	cout << "Введите стороны треугольника" << endl;
 	cout << "A" << endl;
 	int A;
@@ -160,7 +193,7 @@ int main()
 		while (cin.get() != '\n');
 		cout << "Недействительный ввод" << endl;
 	}
-	Triangle triangle(A, B, C);
+	Triangle triangle(Name, Lines, A, B, C);
 	system("cls");
 	circle.Print_Circle();
 	foursquare.Print_Foursquare();
